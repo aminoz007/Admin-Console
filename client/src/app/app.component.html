@@ -1,0 +1,9 @@
+<div id="wrapper">
+    <nav *ngIf="authService.isLoggedIn()" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">      
+        <app-header></app-header>
+        <app-side-menu></app-side-menu>
+    </nav>
+    <router-outlet></router-outlet>
+    <app-alerts *ngIf="authService.isLoggedIn()"></app-alerts>
+</div>
+<!-- /#wrapper -->

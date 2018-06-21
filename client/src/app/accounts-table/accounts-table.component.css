@@ -1,0 +1,420 @@
+a:focus {
+	outline : none;
+}
+
+div.dataTables_length label {
+	font-weight: normal;
+	text-align: left;
+	white-space: nowrap;
+}
+
+div.dataTables_length select {
+	width: 75px;
+	display: inline-block;
+}
+
+div.dataTables_filter {
+    text-align: right;
+}
+
+div.dataTables_filter label {
+	font-weight: normal;
+	white-space: nowrap;
+	text-align: left;
+}
+
+div.dataTables_filter input {
+	margin-left: 0.5em;
+	display: inline-block;
+}
+
+@media screen and (max-width: 767px) {
+	div.dataTables_length,
+	div.dataTables_filter {
+		text-align: center;
+	}
+}
+
+.actions {
+	padding-top: 15px;
+	margin-left: 5px;
+	position: relative;
+}
+.tooltiptext{
+	visibility: hidden;
+    width: 120px;
+    background-color: rgb(226, 217, 217);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+	z-index: 1;
+	bottom: 70%;
+	right:50%;
+}
+
+.actions:hover .tooltiptext {
+    visibility: visible;
+}
+
+.h5, h5 {
+	font-size: 14px;
+	margin-left: 20px;
+	font-weight: bold;
+}
+.form-group {
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+/* ngx-datatable component CSS */
+
+.ngx-datatable {
+	box-shadow: none;
+	font-size: 13px;
+	border: 1px solid #ddd !important;
+ }
+ .ngx-datatable .datatable-header {
+	height: unset !important;
+ }
+ .ngx-datatable .datatable-header .datatable-header-cell {
+	vertical-align: bottom;
+	padding: 0.75rem;
+	border-bottom: 1px solid #d1d4d7;
+ }
+ .ngx-datatable .datatable-header .datatable-header-cell .datatable-header-cell-label {
+	line-height: 24px;
+	font-weight: bold;
+ }
+ .ngx-datatable .datatable-body .datatable-body-row {
+	padding: 0.75rem;
+	vertical-align: top;
+	border-top: 1px solid #d1d4d7;
+ }
+ .ngx-datatable .datatable-body .datatable-body-row.datatable-row-even {
+	background-color: rgba(0, 0, 0, 0.03);
+ }
+ .ngx-datatable .datatable-body .datatable-body-row .datatable-body-cell {
+	text-align: left;
+	vertical-align: top;
+ }
+ .ngx-datatable .datatable-body .datatable-body-row.active {
+	background-color: #d9534f;
+ }
+ .ngx-datatable .datatable-footer {
+	margin-top: -1px;
+ }
+ .ngx-datatable .datatable-footer .page-count {
+	line-height: 50px;
+	height: 50px;
+	padding: 0 1.2rem;
+ }
+ .ngx-datatable .datatable-footer .datatable-pager {
+	margin: 0 10px;
+	vertical-align: top;
+ }
+ .ngx-datatable .datatable-footer .datatable-pager ul li {
+	margin: 10px 0px;
+ }
+ .ngx-datatable .datatable-footer .datatable-pager ul li:not(.disabled).active a{
+	background-color: #337ab7;
+    color: white;
+    border: 1px solid #337ab7;
+ }
+ .ngx-datatable .datatable-footer .datatable-pager ul li:not(.disabled):not(.active):hover a {
+	background-color: #ddd;
+ }
+ .ngx-datatable .datatable-footer .datatable-pager a {
+	padding: 5px 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+	border-radius: 0px;
+	display: inline !important;
+ }
+ .datatable-icon-right,
+ .datatable-icon-left,
+ .datatable-icon-skip,
+ .datatable-icon-prev {
+	position: relative;	 
+ }
+ 
+ .sort-btn:not([class*="datatable-icon-"]):not(:first-of-type):before { 
+	content: "\f0dc";
+    font-family: FontAwesome;
+    color: rgba(50, 50, 50, 0.5);
+	}
+ 
+ .datatable-icon-right:before {
+    font-family: FontAwesome;
+    left:-5px;
+    position:absolute;
+	top:0;
+	font-style: normal;
+	content: "\f105";
+ }
+ .datatable-icon-left:before {
+    font-family: FontAwesome;
+    left:-5px;
+    position:absolute;
+	top:0;
+	font-style: normal;
+	content: "\f104";
+ }
+ .datatable-icon-skip:before {
+    font-family: FontAwesome;
+    left:-5px;
+    position:absolute;
+	top:0;
+	font-style: normal;
+	content: "\f101";
+ }
+ .datatable-icon-prev:before {
+    font-family: FontAwesome;
+    left:-5px;
+    position:absolute;
+	top:0;
+	font-style: normal;
+	content: "\f100";
+ }
+ .datatable-icon-up:before {
+	font-family: FontAwesome;
+	content: "\f0de";
+  }
+  .datatable-icon-down:before {
+	font-family: FontAwesome;
+	content: "\f0dd";
+  }
+
+ .datatable-checkbox {
+	position: relative;
+	margin: 0;
+	cursor: pointer;
+	vertical-align: middle;
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 0; }
+	.datatable-checkbox input[type='checkbox'] {
+	  position: relative;
+	  margin: 0 1rem 0 0;
+	  cursor: pointer;
+	  outline: none; }
+	  .datatable-checkbox input[type='checkbox']:before {
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		content: "";
+		position: absolute;
+		left: 0;
+		z-index: 1;
+		width: 1rem;
+		height: 1rem;
+		border: 2px solid #f2f2f2; }
+	  .datatable-checkbox input[type='checkbox']:checked:before {
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+		height: .5rem;
+		border-color: #009688;
+		border-top-style: none;
+		border-right-style: none; }
+	  .datatable-checkbox input[type='checkbox']:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 1rem;
+		height: 1rem;
+		background: #fff;
+		cursor: pointer; }
+
+/* CSS from bootstrap 4 to make ng-bootstrap work for angular 5
+   Remove when we upgrade the project to bootstrap 4 */
+
+.fade {
+opacity: 0;
+transition: opacity 0.15s linear;
+}
+
+.fade.show {
+opacity: 1;
+}
+.modal-open {
+overflow: hidden;
+}
+
+.modal {
+position: fixed;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+z-index: 1050;
+display: none;
+overflow: hidden;
+outline: 0;
+}
+
+.modal-open .modal {
+overflow-x: hidden;
+overflow-y: auto;
+}
+
+.modal-dialog {
+position: relative;
+width: auto;
+margin: 0.5rem;
+pointer-events: none;
+}
+
+.modal.fade .modal-dialog {
+transition: -webkit-transform 0.3s ease-out;
+transition: transform 0.3s ease-out;
+transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+-webkit-transform: translate(0, -25%);
+transform: translate(0, -25%);
+}
+
+.modal.show .modal-dialog {
+-webkit-transform: translate(0, 0);
+transform: translate(0, 0);
+}
+
+.modal-dialog-centered {
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-align: center;
+-ms-flex-align: center;
+align-items: center;
+min-height: calc(100% - (0.5rem * 2));
+}
+
+.modal-content {
+position: relative;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-orient: vertical;
+-webkit-box-direction: normal;
+-ms-flex-direction: column;
+flex-direction: column;
+width: 100%;
+pointer-events: auto;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid rgba(0, 0, 0, 0.2);
+border-radius: 0.3rem;
+outline: 0;
+}
+
+.modal-backdrop {
+position: fixed;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+z-index: 1040;
+background-color: #000;
+}
+
+.modal-backdrop.fade {
+opacity: 0;
+}
+
+.modal-backdrop.show {
+opacity: 0.5;
+}
+
+.modal-header {
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-align: start;
+-ms-flex-align: start;
+align-items: flex-start;
+-webkit-box-pack: justify;
+-ms-flex-pack: justify;
+justify-content: space-between;
+padding: 1rem;
+border-bottom: 1px solid #e9ecef;
+border-top-left-radius: 0.3rem;
+border-top-right-radius: 0.3rem;
+}
+
+.modal-header .close {
+padding: 1rem;
+margin: -1rem -1rem -1rem auto;
+}
+
+.modal-title {
+margin-bottom: 0;
+line-height: 1.5;
+}
+
+.modal-body {
+position: relative;
+-webkit-box-flex: 1;
+-ms-flex: 1 1 auto;
+flex: 1 1 auto;
+padding: 1rem;
+}
+
+.modal-footer {
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-align: center;
+-ms-flex-align: center;
+align-items: center;
+-webkit-box-pack: end;
+-ms-flex-pack: end;
+justify-content: flex-end;
+padding: 1rem;
+border-top: 1px solid #e9ecef;
+}
+
+.modal-footer > :not(:first-child) {
+margin-left: .25rem;
+}
+
+.modal-footer > :not(:last-child) {
+margin-right: .25rem;
+}
+
+.modal-scrollbar-measure {
+position: absolute;
+top: -9999px;
+width: 50px;
+height: 50px;
+overflow: scroll;
+}
+
+@media (min-width: 576px) {
+.modal-dialog {
+	max-width: 500px;
+	margin: 1.75rem auto;
+}
+.modal-dialog-centered {
+	min-height: calc(100% - (1.75rem * 2));
+}
+.modal-sm {
+	max-width: 300px;
+}
+}
+
+@media (min-width: 992px) {
+.modal-lg {
+	max-width: 800px;
+}
+}
+
+.checkbox-inline {
+	position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    vertical-align: middle;
+	cursor: pointer;
+	margin-left: 0px !important;
+}

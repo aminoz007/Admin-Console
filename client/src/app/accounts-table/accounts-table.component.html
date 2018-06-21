@@ -1,0 +1,200 @@
+<div id="page-wrapper">  
+  <div class="row">
+      <div class="col-lg-12">
+          <h1 class="page-header">{{ env | titlecase}} Table</h1>
+      </div>
+      <!-- /.col-lg-12 -->
+  </div>
+  <!-- /.row -->
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  Detailed List of Accounts
+                <a (click)="actionsIsClicked = !actionsIsClicked" style="float:right;">
+                  <i *ngIf="!actionsIsClicked" class="fa fa-plus-circle fa-fw" style="color:red;"></i>
+                  <i *ngIf="actionsIsClicked" class="fa fa-minus-circle fa-fw" style="color:green;"></i>
+                </a>
+                <div class="row" *ngIf="actionsIsClicked">
+                  <div class="col-xs-12">
+                    <div class="pull-right">
+                      <a (click)="onDownload()">
+                        <i class="fa fa-download fa-fw actions"><span class="tooltiptext">Export to csv</span></i>
+                      </a> 
+                      <a (click)="onUpload(uploadPopup)">
+                        <i class="fa fa-upload fa-fw actions"><span class="tooltiptext">Import from csv</span></i>
+                      </a> 
+                      <a (click)="onUpdate()">
+                          <i class="fa fa-pencil-square fa-fw actions"><span class="tooltiptext">Update accounts</span></i>
+                      </a> 
+                      <a (click)="onSend(email)">
+                        <i class="fa fa-paper-plane fa-fw actions"><span class="tooltiptext">Send accounts</span></i>
+                      </a>      
+                      <a (click)="onRemove()">
+                        <i class="fa fa-trash fa-fw actions"><span class="tooltiptext">Delete accounts</span></i>
+                      </a>                                
+                      <a (click)="onRefresh()">
+                        <i class="fa fa-refresh fa-fw actions"><span class="tooltiptext">Refresh list</span></i>
+                      </a>
+                      <a (click)="dispListCol = !dispListCol">
+                        <i class="fa fa-list fa-fw actions"><span class="tooltiptext">List of columns</span></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- column toggle -->
+              <div *ngIf="dispListCol && actionsIsClicked">
+                <h5>Available Columns:</h5>
+                <div class="form-group row" >
+                  <label class="checkbox-inline col-sm-2" *ngFor='let col of allColumns'>
+                    <input type='checkbox' (click)='onToggle(col)' [checked]='colIsChecked(col)' />
+                    {{col.label}}
+                  </label>
+                </div>
+              </div>
+              <!-- On upload show popup using ng bootstrap -->
+              <ng-template #uploadPopup let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Upload accounts</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <input type="file" #fileToUpload />
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" (click)="c(fileToUpload)">Upload</button>
+                </div>
+              </ng-template>
+              <!-- End upload -->
+              <!-- On Send show popup using ng bootstrap -->
+              <ng-template #email let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Copy this email <h6>Email Server is not ready yet!</h6></h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <p>Hello,<br><br>Here is the DFW accounts you requested to use in the <strong>{{ env | titlecase}}</strong> environment. Note that these accounts are specifically for {{ env | titlecase}} and are cDVR enabled. 
+                    <br>Use the Access ID column in this table as your user id and the value in the password column for the password.<br> 
+                    <br>Take a moment to check these accounts and if you experience any issue that is account specific then contact the DFW Systems Integration distribution list so one of us can investigate. Also let us know if you need changes to any of the packages or zip codes.<br>
+                    <br>Thanks,<br>DFW - DSI
+                    <p>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Account Id</th>
+                        <th>Access Id</th>
+                        <th>Password</th>
+                        <th>Package</th>
+                        <th>zip code</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of selected">
+                        <td>{{row.account_id}}</td>
+                        <td>{{row.access_id}}</td>
+                        <td>{{row.password}}</td>
+                        <td>{{row.package}}</td>
+                        <td>{{row.zip_code}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                </div>
+              </ng-template>
+              <!-- End Send -->
+              <!-- /.panel-heading -->
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="dataTables_length">
+                      <label>Show 
+                        <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChanged($event)" class="form-control input-sm">
+                                <option *ngFor="let opt of limitOptions" [ngValue]="opt.value">{{opt.key}}</option>
+                        </select> 
+                        entries
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="dataTables_filter">
+                        <label>
+                          Search:
+                          <input type="search" (keyup)='updateFilter($event)' class="form-control input-sm" style="width:auto" placeholder="">
+                        </label>
+                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <ngx-datatable
+                      #table
+                      [rows]="rows"
+                      [columnMode]="'force'"
+                      [scrollbarH]="true"
+                      [headerHeight]="50"
+                      [footerHeight]="50"
+                      [rowHeight]="'auto'"
+                      [limit]="pageSize"
+                      [selected]="selected"
+                      [selectionType]="'checkbox'"
+                      [selectAllRowsOnPage]="false"
+                      [displayCheck]="displayCheck"
+                      (select)='onSelect($event)'>
+                      <ngx-datatable-column 
+                          [width]="30"
+                          [sortable]="false"
+                          [canAutoResize]="false"
+                          [draggable]="false"
+                          [resizeable]="false"
+                          [headerCheckboxable]="true"
+                          [checkboxable]="true">
+                      </ngx-datatable-column>
+                      <ngx-datatable-column 
+                      *ngFor="let col of columns" 
+                      [prop]="col.name">
+                        <ng-template ngx-datatable-header-template>
+                            <span>{{ col.label }}</span>
+                        </ng-template>
+                        <ng-template *ngIf="col.editable" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                          <span
+                            title="Double click to edit"
+                            (dblclick)="editing[rowIndex + '-' + col.name.toLowerCase()] = true"
+                            *ngIf="!editing[rowIndex + '-' + col.name.toLowerCase()]">
+                            {{value}}
+                          </span>
+                          <input
+                            autofocus
+                            (blur)="updateValue($event, col.name.toLowerCase(), rowIndex, row)"
+                            *ngIf="editing[rowIndex + '-' + col.name.toLowerCase()] && !col.enum"
+                            type="text"
+                            [value]="value"
+                          />
+                          <select 
+                          autofocus 
+                          (blur)="updateValue($event, col.name.toLowerCase(), rowIndex, row)"
+                          *ngIf="editing[rowIndex + '-' + col.name.toLowerCase()] && col.enum"
+                          [value]="value">
+                            <option *ngFor="let opt of col.enum" [ngValue]="opt">{{opt}}</option>
+                          </select> 
+                        </ng-template>
+                      </ngx-datatable-column>
+                    </ngx-datatable>    
+                  </div>
+                </div>
+                  <!-- /.table-responsive -->
+              </div>
+              <!-- /.panel-body -->
+          </div>
+          <!-- /.panel -->
+      </div>
+      <!-- /.col-lg-12 -->
+  </div>
+  <!-- /.row -->
+</div>

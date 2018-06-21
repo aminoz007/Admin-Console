@@ -1,0 +1,19 @@
+<div id="page-wrapper">  
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-body background">
+          <h4>
+            <span>Session Alerts</span>
+            <button class="btn btn-primary pull-right" (click)="alertService.clear()">Clear</button>
+          </h4>
+          <div *ngIf="alertService.alerts.length">
+            <p *ngFor="let alert of alertService.alerts">
+              <ngb-alert [type]="alert.type" (close)="alertService.close(alert)">{{ alert.message }}</ngb-alert>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

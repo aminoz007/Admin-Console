@@ -1,0 +1,96 @@
+<div id="page-wrapper">  
+  <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Accounts Dashboard</h1>
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Number of accounts per environment
+            </div>
+            <div class="panel-body">
+              <ngx-charts-advanced-pie-chart
+                [scheme]="colorScheme"
+                [results]="accounts"
+                [gradient]="gradient">
+              </ngx-charts-advanced-pie-chart>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              Accounts delivery status
+          </div>
+          <div class="panel-body">
+              <ngx-charts-bar-vertical-2d
+              [scheme]="colorScheme"
+              [results]="deliveryStatus"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel">
+            </ngx-charts-bar-vertical-2d>
+          </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              Production: Accounts type
+          </div>
+          <div class="panel-body">
+            <ngx-charts-number-card
+              [scheme]="colorScheme"
+              [results]="prodTypes">
+            </ngx-charts-number-card>
+          </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              Staging: Accounts type
+          </div>
+          <div class="panel-body">
+            <ngx-charts-number-card
+              [scheme]="colorScheme"
+              [results]="stageTypes">
+            </ngx-charts-number-card>
+          </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            Production: packages
+        </div>
+        <div class="panel-body">
+          <ngx-charts-tree-map
+            [scheme]="colorScheme"
+            [results]="prodPackages">
+          </ngx-charts-tree-map>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            Staging: packages
+        </div>
+        <div class="panel-body">
+          <ngx-charts-tree-map
+            [scheme]="colorScheme"
+            [results]="stagePackages">
+          </ngx-charts-tree-map>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

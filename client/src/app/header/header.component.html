@@ -1,0 +1,107 @@
+<!-- /.navbar-header -->
+<div class="navbar-header">
+  <a class="navbar-brand" href="/">Accounts Management Console
+    <small>@ DFW Systems Integration</small>
+  </a>
+</div>
+<ul class="nav navbar-top-links navbar-right">
+  <li class="dropdown">
+      <a (click)="onClick('msg')">
+          <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-messages" *ngIf="headerClick.msg" style="display:block;">
+          <li *ngFor="let msg of listMsg">
+              <a>
+                  <div>
+                      <strong>{{msg.sender}}</strong>
+                      <span class="pull-right text-muted">
+                          <em>{{msg.date}}</em>
+                      </span>
+                  </div>
+                  <div>{{msg.text}}</div>
+              </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+              <a class="text-center">
+                  <strong>Read All Messages</strong>
+                  <i class="fa fa-angle-right"></i>
+              </a>
+          </li>
+      </ul>
+      <!-- /.dropdown-messages -->
+  </li>
+  <!-- /.dropdown -->
+  <li class="dropdown">
+      <a (click)="onClick('task')">
+          <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-tasks" *ngIf="headerClick.task" style="display:block;">
+          <li *ngFor="let task of listTasks">
+              <a>
+                  <div>
+                      <p>
+                          <strong>{{task.name}}</strong>
+                          <span class="pull-right text-muted">{{task.progress}}%</span>
+                      </p>
+                      <div class="progress progress-striped active">
+                          <div [ngClass]="'progress-bar ' + 'progress-bar-' + task.status" role="progressbar" [attr.aria-valuenow]="task.progress" aria-valuemin="0" aria-valuemax="100" [style.width]="task.progress + '%'">
+                              <span class="sr-only">{{task.progress}}%</span>
+                          </div>
+                      </div>
+                  </div>
+              </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+              <a class="text-center">
+                  <strong>See All Tasks</strong>
+                  <i class="fa fa-angle-right"></i>
+              </a>
+          </li>
+      </ul>
+      <!-- /.dropdown-tasks -->
+  </li>
+  <!-- /.dropdown -->
+  <li class="dropdown">
+      <a (click)="onClick('notification')">
+          <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-alerts" *ngIf="headerClick.notification" style="display:block;">
+          <li *ngFor="let notif of listNotif">
+              <a>
+                  <div>
+                      <i [ngClass]="'fa fa-'+ notif.type + ' fa-fw'"></i> {{notif.text}}
+                      <span class="pull-right text-muted small">{{notif.time}}</span>
+                  </div>
+              </a>
+          </li>
+          <li class="divider"></li>
+          <li class="divider"></li>
+          <li>
+              <a class="text-center">
+                  <strong>See All Alerts</strong>
+                  <i class="fa fa-angle-right"></i>
+              </a>
+          </li>
+      </ul>
+      <!-- /.dropdown-alerts -->
+  </li>
+  <!-- /.dropdown -->
+  <li class="dropdown">
+      <a (click)="onClick('user')">
+          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-user" *ngIf="headerClick.user" style="display:block;">
+          <li><a><i class="fa fa-user fa-fw"></i> User Profile</a>
+          </li>
+          <li><a><i class="fa fa-gear fa-fw"></i> Settings</a>
+          </li>
+          <li class="divider"></li>
+          <li><a (click)="onLogout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+          </li>
+      </ul>
+      <!-- /.dropdown-user -->
+  </li>
+  <!-- /.dropdown -->
+</ul>
