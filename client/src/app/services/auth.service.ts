@@ -7,7 +7,10 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class AuthService {
   errorMsg = '';
-  private authUrl = 'http://localhost:3000/auth/';
+  // For Dev
+  // private authUrl = 'http://localhost:3000/auth/';
+
+  private authUrl = '/auth';
 
   constructor(private http: HttpClient) { }
 
