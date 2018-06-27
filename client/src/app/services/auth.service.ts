@@ -10,7 +10,7 @@ export class AuthService {
   // For Dev
   // private authUrl = 'http://localhost:3000/auth/';
 
-  private authUrl = '/auth';
+  private authUrl = '/auth/';
 
   constructor(private http: HttpClient) { }
 

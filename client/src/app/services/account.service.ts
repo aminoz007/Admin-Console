@@ -11,7 +11,9 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class AccountService {
 
-  private accountUrl = 'http://localhost:3000/accounts/';
+  // For Dev
+  // private accountUrl = 'http://localhost:3000/accounts/';
+  private accountUrl = '/accounts/';
   private httpOptions = {};
 
   constructor(
