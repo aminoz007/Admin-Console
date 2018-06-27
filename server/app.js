@@ -11,7 +11,7 @@ if(process.env.DEV_ENV){
 	mongoose.connect('mongodb://localhost/admin-console');
 }
 else{
-	mongoose.connect('<Your mongolab connection string>/chirp');
+	mongoose.connect('mongodb://localhost/admin-console');
 }
 
 //// Initialize Passport jwt
@@ -23,14 +23,11 @@ var authenticate = require('./routes/authenticate');
 var app = express();
 
 /* This code to disable CORS to allow Angular getting proper responses
-  Delete before going to production, since it is meant only for dev purposes */
+  to be used only in dev, since it is meant only for dev purposes */
+if(process.env.DEV_ENV){
   var cors = require('cors');
   app.use(cors());
-// END of CORS CONFIG
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+}
 
 // List of Middlewares 
 app.use(logger('dev'));
@@ -43,9 +40,14 @@ app.use(passport.initialize());
 app.use('/accounts', passport.authenticate('jwt', {session: false}), accounts);
 app.use('/auth', authenticate);
 
-app.get('/*', function(req,res) {    
-  res.sendFile(path.join(__dirname+'/views/index.html'));
-});
+if(!process.env.DEV_ENV){
+	// In production serve only the static files from views directory
+	app.use(express.static(path.join(__dirname, 'views')));
+	app.get('*', function(req,res) {    
+	  res.sendFile(path.join(__dirname, 'views/index.html'));
+	});
+}
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
