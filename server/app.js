@@ -11,7 +11,7 @@ if(process.env.DEV_ENV){
 	mongoose.connect('mongodb://localhost/admin-console');
 }
 else{
-	mongoose.connect('mongodb://localhost/admin-console');
+	mongoose.connect(process.env.PROD_MONGODB);
 }
 
 //// Initialize Passport jwt
