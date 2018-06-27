@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideMenuComponent implements OnInit {
 
+  tablesIsClicked = false;
   constructor() { }
 
   ngOnInit() {

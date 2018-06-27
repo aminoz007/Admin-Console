@@ -6,7 +6,13 @@ var logger = require('morgan');
 var passport = require('passport');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/admin-console');
+
+if(process.env.DEV_ENV){
+	mongoose.connect('mongodb://localhost/admin-console');
+}
+else{
+	mongoose.connect('<Your mongolab connection string>/chirp');
+}
 
 //// Initialize Passport jwt
 require('./passport-init');
@@ -23,8 +29,8 @@ var app = express();
 // END of CORS CONFIG
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
 // List of Middlewares 
 app.use(logger('dev'));
@@ -36,6 +42,10 @@ app.use(passport.initialize());
 
 app.use('/accounts', passport.authenticate('jwt', {session: false}), accounts);
 app.use('/auth', authenticate);
+
+app.get('/*', function(req,res) {    
+  res.sendFile(path.join(__dirname+'/views/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

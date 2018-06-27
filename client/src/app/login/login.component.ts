@@ -9,7 +9,7 @@ import { AuthService } from './../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   onLogin(username: string, password: string) {
     this.authService.login(username, password).subscribe(() => {

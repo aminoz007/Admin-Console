@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlertsComponent implements OnInit {
 
-  constructor( private alertService: AlertService) { }
+  constructor( public alertService: AlertService) { }
 
   ngOnInit() {
   }
